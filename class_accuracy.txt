@@ -1,0 +1,404 @@
+library(forecast)
+library(caret)
+
+## may 15
+data1 = read.csv(file.choose())
+
+accuracydf = data.frame('May','BinaryLogistic',1,2,3)
+colnames(accuracydf) = c('Month','Model','Sensitivity','KappaValue','BalancedAccuracy')
+str(accuracydf)
+accuracydf$Month = as.character(accuracydf$Month)
+accuracydf$Model = as.character(accuracydf$Model)
+
+conf1 = confusionMatrix(data1$LogisticReg, data1$Actual, positive = "Yes")
+accuracydf[1,]= c('May','LogisticReg',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN, data1$Actual, positive = "Yes")
+accuracydf[2,]= c('May','BinaryANN',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_old, data1$Actual, positive = "Yes")
+accuracydf[3,]= c('May','ANN_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_1.9sig, data1$Actual, positive = "Yes")
+accuracydf[4,]= c('May','ARIMA_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_new, data1$Actual, positive = "Yes")
+accuracydf[5,]= c('May','ANN_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_new_arima, data1$Actual, positive = "Yes")
+accuracydf[6,]= c('May','ARIMA_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Aggregate_Model, data1$Actual, positive = "Yes")
+accuracydf[7,]= c('May','AggregateModel',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+accuracyoverall = accuracydf
+
+## June 15
+
+data1 = read.csv(file.choose())
+
+
+accuracydf = data.frame('June','BinaryLogistic',1,2,3)
+colnames(accuracydf) = c('Month','Model','Sensitivity','KappaValue','BalancedAccuracy')
+str(accuracydf)
+accuracydf$Month = as.character(accuracydf$Month)
+accuracydf$Model = as.character(accuracydf$Model)
+
+conf1 = confusionMatrix(data1$LogisticReg, data1$Actual, positive = "Yes")
+accuracydf[1,]= c('June','LogisticReg',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN, data1$Actual, positive = "Yes")
+accuracydf[2,]= c('June','BinaryANN',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_old, data1$Actual, positive = "Yes")
+accuracydf[3,]= c('June','ANN_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_1.9sig, data1$Actual, positive = "Yes")
+accuracydf[4,]= c('June','ARIMA_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_new, data1$Actual, positive = "Yes")
+accuracydf[5,]= c('June','ANN_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_new_arima, data1$Actual, positive = "Yes")
+accuracydf[6,]= c('June','ARIMA_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Aggregate_Model, data1$Actual, positive = "Yes")
+accuracydf[7,]= c('June','AggregateModel',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+accuracyoverall = rbind(accuracyoverall,accuracydf)
+
+## July 15
+
+data1 = read.csv(file.choose())
+
+
+accuracydf = data.frame('July','BinaryLogistic',1,2,3)
+colnames(accuracydf) = c('Month','Model','Sensitivity','KappaValue','BalancedAccuracy')
+str(accuracydf)
+accuracydf$Month = as.character(accuracydf$Month)
+accuracydf$Model = as.character(accuracydf$Model)
+
+conf1 = confusionMatrix(data1$LogisticReg, data1$Actual, positive = "Yes")
+accuracydf[1,]= c('July','LogisticReg',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN, data1$Actual, positive = "Yes")
+accuracydf[2,]= c('July','BinaryANN',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_old, data1$Actual, positive = "Yes")
+accuracydf[3,]= c('July','ANN_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_1.9sig, data1$Actual, positive = "Yes")
+accuracydf[4,]= c('July','ARIMA_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_new, data1$Actual, positive = "Yes")
+accuracydf[5,]= c('July','ANN_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_new_arima, data1$Actual, positive = "Yes")
+accuracydf[6,]= c('July','ARIMA_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Aggregate_Model, data1$Actual, positive = "Yes")
+accuracydf[7,]= c('July','AggregateModel',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+accuracyoverall = rbind(accuracyoverall,accuracydf)
+
+## August 15
+
+data1 = read.csv(file.choose())
+
+accuracydf = data.frame('August','BinaryLogistic',1,2,3)
+colnames(accuracydf) = c('Month','Model','Sensitivity','KappaValue','BalancedAccuracy')
+str(accuracydf)
+accuracydf$Month = as.character(accuracydf$Month)
+accuracydf$Model = as.character(accuracydf$Model)
+
+conf1 = confusionMatrix(data1$LogisticReg, data1$Actual, positive = "Yes")
+accuracydf[1,]= c('August','LogisticReg',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN, data1$Actual, positive = "Yes")
+accuracydf[2,]= c('August','BinaryANN',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_old, data1$Actual, positive = "Yes")
+accuracydf[3,]= c('August','ANN_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_1.9sig, data1$Actual, positive = "Yes")
+accuracydf[4,]= c('August','ARIMA_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_new, data1$Actual, positive = "Yes")
+accuracydf[5,]= c('August','ANN_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_new_arima, data1$Actual, positive = "Yes")
+accuracydf[6,]= c('August','ARIMA_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Aggregate_Model, data1$Actual, positive = "Yes")
+accuracydf[7,]= c('August','AggregateModel',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+accuracyoverall = rbind(accuracyoverall,accuracydf)
+
+## September 15
+
+data1 = read.csv(file.choose())
+
+accuracydf = data.frame('September','BinaryLogistic',1,2,3)
+colnames(accuracydf) = c('Month','Model','Sensitivity','KappaValue','BalancedAccuracy')
+str(accuracydf)
+accuracydf$Month = as.character(accuracydf$Month)
+accuracydf$Model = as.character(accuracydf$Model)
+
+conf1 = confusionMatrix(data1$LogisticReg, data1$Actual, positive = "Yes")
+accuracydf[1,]= c('September','LogisticReg',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN, data1$Actual, positive = "Yes")
+accuracydf[2,]= c('September','BinaryANN',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_old, data1$Actual, positive = "Yes")
+accuracydf[3,]= c('September','ANN_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_1.9sig, data1$Actual, positive = "Yes")
+accuracydf[4,]= c('September','ARIMA_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_new, data1$Actual, positive = "Yes")
+accuracydf[5,]= c('September','ANN_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_new_arima, data1$Actual, positive = "Yes")
+accuracydf[6,]= c('September','ARIMA_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Aggregate_Model, data1$Actual, positive = "Yes")
+accuracydf[7,]= c('September','AggregateModel',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+accuracyoverall = rbind(accuracyoverall,accuracydf)
+
+## October 15
+
+data1 = read.csv(file.choose())
+
+accuracydf = data.frame('October','BinaryLogistic',1,2,3)
+colnames(accuracydf) = c('Month','Model','Sensitivity','KappaValue','BalancedAccuracy')
+str(accuracydf)
+accuracydf$Month = as.character(accuracydf$Month)
+accuracydf$Model = as.character(accuracydf$Model)
+
+conf1 = confusionMatrix(data1$LogisticReg, data1$Actual, positive = "Yes")
+accuracydf[1,]= c('October','LogisticReg',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN, data1$Actual, positive = "Yes")
+accuracydf[2,]= c('October','BinaryANN',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_old, data1$Actual, positive = "Yes")
+accuracydf[3,]= c('October','ANN_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_1.9sig, data1$Actual, positive = "Yes")
+accuracydf[4,]= c('October','ARIMA_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_new, data1$Actual, positive = "Yes")
+accuracydf[5,]= c('October','ANN_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_new_arima, data1$Actual, positive = "Yes")
+accuracydf[6,]= c('October','ARIMA_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Aggregate_Model, data1$Actual, positive = "Yes")
+accuracydf[7,]= c('October','AggregateModel',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+accuracyoverall = rbind(accuracyoverall,accuracydf)
+
+## November 15
+
+data1 = read.csv(file.choose())
+
+accuracydf = data.frame('November','BinaryLogistic',1,2,3)
+colnames(accuracydf) = c('Month','Model','Sensitivity','KappaValue','BalancedAccuracy')
+str(accuracydf)
+accuracydf$Month = as.character(accuracydf$Month)
+accuracydf$Model = as.character(accuracydf$Model)
+
+conf1 = confusionMatrix(data1$LogisticReg, data1$Actual, positive = "Yes")
+accuracydf[1,]= c('November','LogisticReg',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN, data1$Actual, positive = "Yes")
+accuracydf[2,]= c('November','BinaryANN',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_old, data1$Actual, positive = "Yes")
+accuracydf[3,]= c('November','ANN_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_1.9sig, data1$Actual, positive = "Yes")
+accuracydf[4,]= c('November','ARIMA_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_new, data1$Actual, positive = "Yes")
+accuracydf[5,]= c('November','ANN_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_new_arima, data1$Actual, positive = "Yes")
+accuracydf[6,]= c('November','ARIMA_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Aggregate_Model, data1$Actual, positive = "Yes")
+accuracydf[7,]= c('November','AggregateModel',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+accuracyoverall = rbind(accuracyoverall,accuracydf)
+
+## December 15
+
+data1 = read.csv(file.choose())
+
+accuracydf = data.frame('December','BinaryLogistic',1,2,3)
+colnames(accuracydf) = c('Month','Model','Sensitivity','KappaValue','BalancedAccuracy')
+str(accuracydf)
+accuracydf$Month = as.character(accuracydf$Month)
+accuracydf$Model = as.character(accuracydf$Model)
+
+conf1 = confusionMatrix(data1$LogisticReg, data1$Actual, positive = "Yes")
+accuracydf[1,]= c('December','LogisticReg',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN, data1$Actual, positive = "Yes")
+accuracydf[2,]= c('December','BinaryANN',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_old, data1$Actual, positive = "Yes")
+accuracydf[3,]= c('December','ANN_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_1.9sig, data1$Actual, positive = "Yes")
+accuracydf[4,]= c('December','ARIMA_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_new, data1$Actual, positive = "Yes")
+accuracydf[5,]= c('December','ANN_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_new_arima, data1$Actual, positive = "Yes")
+accuracydf[6,]= c('December','ARIMA_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Aggregate_Model, data1$Actual, positive = "Yes")
+accuracydf[7,]= c('December','AggregateModel',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+accuracyoverall = rbind(accuracyoverall,accuracydf)
+
+## January 16
+
+data1 = read.csv(file.choose())
+
+accuracydf = data.frame('January','BinaryLogistic',1,2,3)
+colnames(accuracydf) = c('Month','Model','Sensitivity','KappaValue','BalancedAccuracy')
+str(accuracydf)
+accuracydf$Month = as.character(accuracydf$Month)
+accuracydf$Model = as.character(accuracydf$Model)
+
+conf1 = confusionMatrix(data1$LogisticReg, data1$Actual, positive = "Yes")
+accuracydf[1,]= c('January','LogisticReg',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN, data1$Actual, positive = "Yes")
+accuracydf[2,]= c('January','BinaryANN',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_old, data1$Actual, positive = "Yes")
+accuracydf[3,]= c('January','ANN_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_1.9sig, data1$Actual, positive = "Yes")
+accuracydf[4,]= c('January','ARIMA_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_new, data1$Actual, positive = "Yes")
+accuracydf[5,]= c('January','ANN_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_new_arima, data1$Actual, positive = "Yes")
+accuracydf[6,]= c('January','ARIMA_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Aggregate_Model, data1$Actual, positive = "Yes")
+accuracydf[7,]= c('January','AggregateModel',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+accuracyoverall = rbind(accuracyoverall,accuracydf)
+
+## February 16
+
+data1 = read.csv(file.choose())
+
+accuracydf = data.frame('February','BinaryLogistic',1,2,3)
+colnames(accuracydf) = c('Month','Model','Sensitivity','KappaValue','BalancedAccuracy')
+str(accuracydf)
+accuracydf$Month = as.character(accuracydf$Month)
+accuracydf$Model = as.character(accuracydf$Model)
+
+conf1 = confusionMatrix(data1$LogisticReg, data1$Actual, positive = "Yes")
+accuracydf[1,]= c('February','LogisticReg',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN, data1$Actual, positive = "Yes")
+accuracydf[2,]= c('February','BinaryANN',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_old, data1$Actual, positive = "Yes")
+accuracydf[3,]= c('February','ANN_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_1.9sig, data1$Actual, positive = "Yes")
+accuracydf[4,]= c('February','ARIMA_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_new, data1$Actual, positive = "Yes")
+accuracydf[5,]= c('February','ANN_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_new_arima, data1$Actual, positive = "Yes")
+accuracydf[6,]= c('February','ARIMA_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Aggregate_Model, data1$Actual, positive = "Yes")
+accuracydf[7,]= c('February','AggregateModel',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+accuracyoverall = rbind(accuracyoverall,accuracydf)
+
+## March 16
+
+data1 = read.csv(file.choose())
+
+accuracydf = data.frame('March','BinaryLogistic',1,2,3)
+colnames(accuracydf) = c('Month','Model','Sensitivity','KappaValue','BalancedAccuracy')
+str(accuracydf)
+accuracydf$Month = as.character(accuracydf$Month)
+accuracydf$Model = as.character(accuracydf$Model)
+
+conf1 = confusionMatrix(data1$LogisticReg, data1$Actual, positive = "Yes")
+accuracydf[1,]= c('March','LogisticReg',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN, data1$Actual, positive = "Yes")
+accuracydf[2,]= c('March','BinaryANN',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_old, data1$Actual, positive = "Yes")
+accuracydf[3,]= c('March','ANN_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_1.9sig, data1$Actual, positive = "Yes")
+accuracydf[4,]= c('March','ARIMA_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_new, data1$Actual, positive = "Yes")
+accuracydf[5,]= c('March','ANN_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_new_arima, data1$Actual, positive = "Yes")
+accuracydf[6,]= c('March','ARIMA_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Aggregate_Model, data1$Actual, positive = "Yes")
+accuracydf[7,]= c('March','AggregateModel',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+accuracyoverall = rbind(accuracyoverall,accuracydf)
+
+## April 16
+
+data1 = read.csv(file.choose())
+
+accuracydf = data.frame('April','BinaryLogistic',1,2,3)
+colnames(accuracydf) = c('Month','Model','Sensitivity','KappaValue','BalancedAccuracy')
+str(accuracydf)
+accuracydf$Month = as.character(accuracydf$Month)
+accuracydf$Model = as.character(accuracydf$Model)
+
+conf1 = confusionMatrix(data1$LogisticReg, data1$Actual, positive = "Yes")
+accuracydf[1,]= c('April','LogisticReg',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN, data1$Actual, positive = "Yes")
+accuracydf[2,]= c('April','BinaryANN',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_old, data1$Actual, positive = "Yes")
+accuracydf[3,]= c('April','ANN_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_1.9sig, data1$Actual, positive = "Yes")
+accuracydf[4,]= c('April','ARIMA_thresh_old',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$ANN_thresh_new, data1$Actual, positive = "Yes")
+accuracydf[5,]= c('April','ANN_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Peak_new_arima, data1$Actual, positive = "Yes")
+accuracydf[6,]= c('April','ARIMA_thresh_new',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+conf1 = confusionMatrix(data1$Aggregate_Model, data1$Actual, positive = "Yes")
+accuracydf[7,]= c('April','AggregateModel',conf1$byClass[1],conf1$overall[2],conf1$byClass[11])
+
+accuracyoverall = rbind(accuracyoverall,accuracydf)
+
+write.csv(accuracyoverall, file = 'Acc_combined.csv',row.names = F)
+
+
+
